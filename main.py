@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # === 1. UI CONFIGURATION ===
-st.set_page_config(page_title="Enterprise Swarm", page_icon="🐝", layout="wide")
+st.set_page_config(page_title="Shreya Ka Page", page_icon="🐝", layout="wide")
 
 # === 2. API CONNECTION (THE BRIDGE) ===
 # We declare the base URL so we can route to both /chat and /upload-doc
@@ -34,7 +34,11 @@ with st.sidebar:
                 try:
                     response = requests.post(
                         f"{BASE_API_URL}/upload-doc",
-                        json={"admin_password": admin_password, "content": upload_content}
+                        json={
+                            "admin_password": admin_password,
+                            "user_id": st.session_state.username,
+                            "content": upload_content
+                        }
                     )
 
                     if response.status_code == 200:
@@ -49,7 +53,7 @@ with st.sidebar:
                     st.error("🔌 Network error. Is Render awake?")
 
 # === 5. MAIN CHAT UI ===
-st.title("🐝 Shreya Pagluu !!")
+st.title("🐝 Shreya Pagluu !!!")
 
 # Give the user a way to change their ID to test memory
 st.session_state.username = st.text_input("🔑 Your Memory ID (Keep this the same to retain memory):",
@@ -61,7 +65,7 @@ for msg in st.session_state.messages:
         st.markdown(msg["content"])
 
 # === 6. THE USER INPUT BOX ===
-if prompt := st.chat_input("Ask the Swarm a question..."):
+if prompt := st.chat_input("ask Shreya a question..."):
 
     # Instantly draw the user's message
     st.session_state.messages.append({"role": "user", "content": prompt})
