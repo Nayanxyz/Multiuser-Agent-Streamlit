@@ -48,4 +48,49 @@ with st.sidebar:
                 except Exception as e:
                     st.error("🔌 Network error. Is Render awake?")
 
+# === 5. MAIN CHAT UI ===
+st.title("🐝 Shreya Pagluu !!")
 
+# Give the user a way to change their ID to test memory
+st.session_state.username = st.text_input("🔑 Your Memory ID (Keep this the same to retain memory):",
+                                          value=st.session_state.username)
+
+# Draw the chat history
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
+
+# === 6. THE USER INPUT BOX ===
+if prompt := st.chat_input("Ask the Swarm a question..."):
+
+    # Instantly draw the user's message
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    # Hit the Render API
+    with st.chat_message("assistant"):
+        with st.spinner("The Swarm is thinking..."):
+
+            payload = {
+                "user_id": st.session_state.username,  # Using your persistent ID here!
+                "prompt": prompt
+            }
+
+            try:
+                response = requests.post(f"{BASE_API_URL}/chat", json=payload)
+
+                if response.status_code == 200:
+                    data = response.json()
+                    answer = data["final_answer"]
+                    routing = data["manager_routing"]
+
+                    st.markdown(answer)
+                    st.caption(f"🛣️ *System routed via: {routing}*")
+
+                    st.session_state.messages.append({"role": "assistant", "content": answer})
+                else:
+                    st.error(f"API Error: {response.status_code}")
+
+            except Exception as e:
+                st.error(f"Failed to connect to the cloud API. Error: {e}")
