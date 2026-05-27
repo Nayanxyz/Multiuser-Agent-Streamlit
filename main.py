@@ -108,7 +108,7 @@ if prompt := st.chat_input("Ask the Swarm a question..."):
 
     # Hit the Render API
     with st.chat_message("assistant"):
-        with st.spinner("The Swarm is thinking..."):
+        with st.spinner("Jango is thinking..."):
 
             payload = {
                 "user_id": st.session_state.username,  # Using your persistent ID here!
