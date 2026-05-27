@@ -57,7 +57,7 @@ with st.sidebar:
                     st.error("🔌 Network error. Is Render awake?")
 
 # === 5. MAIN CHAT UI ===
-st.markdown("<h1 style='text-align: center;'>Jango AI</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-family: cursive;''>JANGO AI</h1>", unsafe_allow_html=True)
 
 
 # Give the user a way to change their ID to test memory
