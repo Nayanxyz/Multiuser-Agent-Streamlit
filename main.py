@@ -60,7 +60,7 @@ with st.sidebar:
 st.title("🐝 Enterprise AI Swarm")
 
 # Give the user a way to change their ID to test memory
-new_username = st.text_input("🔑 Your Memory ID (Keep this the same to retain memory):",
+new_username = st.text_input("🔑 Your User ID (Keep this the same to retain memory):",
                              value=st.session_state.username)
 
 # Update the username in the state
