@@ -57,7 +57,8 @@ with st.sidebar:
                     st.error("🔌 Network error. Is Render awake?")
 
 # === 5. MAIN CHAT UI ===
-st.title("Jango AI ")
+st.markdown("<h1 style='text-align: center;'>Jango AI</h1>", unsafe_allow_html=True)
+
 
 # Give the user a way to change their ID to test memory
 new_username = st.text_input("🔑 Your User ID (Keep this the same to retain memory):",
