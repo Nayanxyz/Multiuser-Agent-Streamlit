@@ -99,7 +99,7 @@ for msg in st.session_state.messages:
         st.markdown(msg["content"])
 
 # === 6. THE USER INPUT BOX ===
-if prompt := st.chat_input("Ask the Swarm a question..."):
+if prompt := st.chat_input("Ask jango a question..."):
 
     # Instantly draw the user's message
     st.session_state.messages.append({"role": "user", "content": prompt})
